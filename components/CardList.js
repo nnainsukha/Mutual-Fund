@@ -31,7 +31,7 @@ const CardList = () => {
           </Text>
           <Text style={{ marginRight: 5, fontWeight: "900" }}>4</Text>
           <Image
-            source={require("../assets/star_filled.png")}
+            source={require("../assets/ratings-1.png")}
             style={styles.StarStyle}
           />
         </View>

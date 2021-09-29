@@ -5,17 +5,29 @@ const Table = () => {
   return (
     <DataTable>
       <DataTable.Header>
-        <DataTable.Title>Fund Size</DataTable.Title>
-        <DataTable.Title>Risk</DataTable.Title>
-        <DataTable.Title numeric>Rating</DataTable.Title>
-        <DataTable.Title numeric>Min SIP</DataTable.Title>
+        <DataTable.Title>Category</DataTable.Title>
+        <DataTable.Title>1Y</DataTable.Title>
+        <DataTable.Title>3Y</DataTable.Title>
+        <DataTable.Title>5Y</DataTable.Title>
       </DataTable.Header>
 
       <DataTable.Row>
-        <DataTable.Cell>5,037.40Cr</DataTable.Cell>
-        <DataTable.Cell>Very High</DataTable.Cell>
-        <DataTable.Cell numeric>5</DataTable.Cell>
-        <DataTable.Cell numeric>500</DataTable.Cell>
+        <DataTable.Cell>Returns</DataTable.Cell>
+        <DataTable.Cell>56.6%</DataTable.Cell>
+        <DataTable.Cell>22.6%</DataTable.Cell>
+        <DataTable.Cell>19.5%</DataTable.Cell>
+      </DataTable.Row>
+      <DataTable.Row>
+        <DataTable.Cell>Average</DataTable.Cell>
+        <DataTable.Cell>48.0%</DataTable.Cell>
+        <DataTable.Cell>13.9%</DataTable.Cell>
+        <DataTable.Cell>14.2%</DataTable.Cell>
+      </DataTable.Row>
+      <DataTable.Row>
+        <DataTable.Cell>Rank</DataTable.Cell>
+        <DataTable.Cell>53</DataTable.Cell>
+        <DataTable.Cell>3</DataTable.Cell>
+        <DataTable.Cell>1</DataTable.Cell>
       </DataTable.Row>
     </DataTable>
   );

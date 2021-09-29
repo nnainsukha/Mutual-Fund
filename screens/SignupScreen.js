@@ -8,12 +8,32 @@ import {
 } from "react-native";
 import FormInput from "../components/FormInput";
 import FormButton from "../components/FormButton";
+import { useSelector, useDispatch } from "react-redux";
+
+export const signUpAction = (user) => {
+  return { type: "CREATE_USER", user };
+};
 
 const SignupScreen = ({ navigation }) => {
   const [email, setEmail] = useState();
   const [name, setName] = useState();
-  const [dob, setDob] = useState();
   const [password, setPassword] = useState();
+  const users = useSelector((state) => state.users);
+
+  const dispatch = useDispatch();
+
+  const signUpUser = () => {
+    console.log("signup called");
+    const user = users.find((u) => u.email === email);
+    if (!user) {
+      console.log("successful signuped");
+      const newUser = { name: name, email: email, password: password };
+      dispatch(signUpAction(newUser));
+      navigation.replace("LoginScreen");
+    } else {
+      console.log("User with email already exists.");
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -40,16 +60,6 @@ const SignupScreen = ({ navigation }) => {
       />
 
       <FormInput
-        labelValue={dob}
-        onChangeText={(dob) => setDob(dob)}
-        placeholderText="DD-MM-YYYY"
-        iconType="calendar"
-        keyboardType="numeric"
-        autoCapitalize="none"
-        autoCorrect={false}
-      />
-
-      <FormInput
         labelValue={password}
         onChangeText={(userPassword) => setPassword(userPassword)}
         placeholderText="Password"
@@ -57,10 +67,7 @@ const SignupScreen = ({ navigation }) => {
         secureTextEntry={true}
       />
 
-      <FormButton
-        buttonTitle="Sign Up"
-        onPress={() => register(email, password)}
-      />
+      <FormButton buttonTitle="Sign Up" onPress={() => signUpUser()} />
 
       <View style={styles.textPrivate}>
         <Text style={styles.color_textPrivate}>
@@ -76,13 +83,12 @@ const SignupScreen = ({ navigation }) => {
           Privacy Policy
         </Text>
       </View>
-
-      <TouchableOpacity
-        style={styles.navButton}
-        onPress={() => navigation.navigate("LoginScreen")}
-      >
-        <Text style={styles.navButtonText}>Have an account? Sign In</Text>
-      </TouchableOpacity>
+      <View style={styles.navview}>
+        <Text style={styles.navtext}>Have an account?</Text>
+        <TouchableOpacity onPress={() => navigation.replace("LoginScreen")}>
+          <Text style={styles.navButtonText}> Sign In</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -120,5 +126,14 @@ const styles = StyleSheet.create({
     fontSize: 13,
     fontWeight: "400",
     color: "grey",
+  },
+  navview: {
+    flexDirection: "row",
+    marginVertical: 10,
+  },
+  navtext: {
+    color: "#444",
+    fontSize: 18,
+    fontWeight: "500",
   },
 });

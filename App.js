@@ -1,30 +1,56 @@
-import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import ListScreen from "./screens/ListScreen";
-import LoginScreen from "./screens/LoginScreen";
-import SignupScreen from "./screens/SignupScreen";
-import FundsListScreen from "./screens/FundsListScreen";
-import Navigator from "./routes/HomeStack";
-import Charts from "./components/Charts";
-import Table from "./components/Table";
+import Main from "./routes/Main";
+import { createStore } from "redux";
+import { Provider } from "react-redux";
+
+const initialState = {
+  loggedInUserId: null,
+  lastUsedId: 1,
+  users: [
+    {
+      id: 1,
+      name: "Neha Nainsukha",
+      email: "neha.trial@test.com",
+      password: "a",
+    },
+  ],
+};
+const reducer = (state = initialState, action) => {
+  if (action.type === "LOGIN_USER") {
+    const newObj = {
+      ...state,
+      loggedInUserId: action.id,
+    };
+    console.log("new obj is ", newObj);
+    return newObj;
+  } else if (action.type === "CREATE_USER") {
+    const newId = state.lastUsedId + 1;
+    const newUser = action.user;
+    newUser.id = newId;
+    const newObj = {
+      ...state,
+      lastUsedId: newId,
+      users: [...state.users, newUser],
+    };
+    console.log("new obj signup is ", newObj);
+    return newObj;
+  } else if (action.type === "LOGOUT_USER") {
+    const newObj = {
+      ...state,
+      loggedInUserId: null,
+    };
+    console.log("after logout ", newObj);
+    return newObj;
+  }
+  return state;
+};
+
+const store = createStore(reducer);
 
 export default function App() {
   return (
-    // <LoginScreen />
-    // <SignupScreen />
-    // <ListScreen />
-    // <Navigator />
-    // <FundsListScreen />
-    <Table />
+    <Provider store={store}>
+      <Main />
+    </Provider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
