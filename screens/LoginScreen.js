@@ -1,10 +1,9 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
   TouchableOpacity,
   Image,
-  Platform,
   StyleSheet,
   ScrollView,
 } from "react-native";
@@ -40,21 +39,20 @@ const LoginScreen = ({ navigation }) => {
       setError("Empty Email!");
       return;
     }
-    if (!password) {
-      setError("Empty Password!");
-      return;
-    }
     if (!validateEmail(email)) {
       setError("Invalid Email Format!");
       return;
     }
-    console.log("login " + password);
+    if (!password) {
+      setError("Empty Password!");
+      return;
+    }
+
     const user = users.find(
       (u) => u.email === email && u.password === password
     );
 
     if (user) {
-      console.log("successful login");
       dispatch(loginUserAction(user.id));
       setError("");
       navigation.replace("FundsListScreen");
@@ -115,9 +113,6 @@ const styles = StyleSheet.create({
     fontSize: 28,
     marginBottom: 10,
     color: "#051d5f",
-  },
-  navButton: {
-    marginTop: 15,
   },
   navButtonText: {
     fontSize: 18,

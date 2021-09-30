@@ -1,18 +1,9 @@
 import React, { useEffect } from "react";
-import {
-  Text,
-  View,
-  StyleSheet,
-  TextInput,
-  TouchableOpacity,
-  ScrollView,
-  Image,
-} from "react-native";
+import { Text, View, StyleSheet, ScrollView, Image } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { LogBox } from "react-native";
-import Card from "../components/Card";
 import FormButton from "../components/FormButton";
-import { windowHeight, windowWidth } from "../utils/Dimensions";
+import { windowHeight } from "../utils/Dimensions";
 
 export default function ProfileScreen({ navigation }) {
   const users = useSelector((state) => state.users);
@@ -24,26 +15,15 @@ export default function ProfileScreen({ navigation }) {
     ]);
   }, []);
 
-  console.log("profile page users ", users);
-  console.log("profile page loggedInUser ", loggedInUserId);
-
   const user = users.find((u) => u.id === loggedInUserId);
-  console.log("profile page ", user);
 
   if (!user) {
-    console.log("should return from here");
     navigation.replace("LoginScreen");
-    // return <View></View>;
   }
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const logoutUser = () => {
-    console.log("successful logouy");
-    // navigation.replace("LoginScreen");
-    // useEffect(() => {
-    //   orderbookStore.dispatch(setOrderbookData(formattedData))
-    // }, [formattedData])
     navigation.reset({
       index: 0,
       routes: [{ name: "LoginScreen" }],
@@ -84,43 +64,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    // backgroundColor: "#fff",
   },
-  CardContainer: {
-    backgroundColor: "#fff",
-    paddingVertical: 20,
-    borderRadius: 15,
-    shadowColor: "#000000",
-    shadowOpacity: 0.4,
-    shadowOffset: {
-      width: 3,
-      height: 3,
-    },
-    elevation: 3,
-    shadowRadius: 5,
-    marginHorizontal: 4,
-    marginVertical: 6,
-  },
-  CardContent: {
-    marginHorizontal: 18,
-    marginVertical: 20,
-  },
+
   button: {
     marginTop: 20,
     marginHorizontal: 16,
-    // width: 200,
-    // // width: "100%",
     height: windowHeight / 15,
     backgroundColor: "#2e64e5",
     padding: 10,
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 3,
-  },
-  buttonText: {
-    fontSize: 18,
-    fontWeight: "bold",
-    color: "#ffffff",
   },
   logo: {
     height: 150,

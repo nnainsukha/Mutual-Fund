@@ -1,101 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   View,
   Text,
   TouchableOpacity,
   Image,
-  Platform,
   StyleSheet,
-  ScrollView,
   FlatList,
-  ImageStore,
-  SafeAreaView,
 } from "react-native";
-import FormInput from "../components/FormInput";
-import FormButton from "../components/FormButton";
-import CardList from "../components/CardList";
-import DetailsScreen from "../screens/DetailsScreen";
 import Card from "../components/Card";
-// import FundsData from "../data/FundsData";
+import * as data from "../data/FundsData";
 
 export default function FundsListScreen({ navigation }) {
-  const Images = {
-    ratings: {
-      1: require("../assets/ratings-1.png"),
-      2: require("../assets/ratings-2.png"),
-      3: require("../assets/ratings-3.png"),
-      4: require("../assets/ratings-4.png"),
-      5: require("../assets/ratings-5.png"),
-    },
-  };
-  const Logo = {
-    logos: {
-      "Axis Bluechip Fund": require("../assets/axis.png"),
-      "Kotak Bluechip Fund": require("../assets/kotak.png"),
-      "IDFC Largecap Fund": require("../assets/idfc.png"),
-      "Baroda Mutual Fund": require("../assets/baroda.png"),
-      "IDBI Largecap Fund": require("../assets/idbi.png"),
-    },
-  };
-  // const funds = FundsData;
-  const [funds, setfunds] = useState([
-    {
-      name: "Axis Bluechip Fund",
-      category: "Large Cap",
-      rating: "5",
-      oneyear: "11.5%",
-      threeyear: "25.6%",
-      fiveyear: "35.6%",
-      type: "Equity",
-      risk: "Low Risk",
-      key: "1",
-    },
-    {
-      name: "Kotak Bluechip Fund",
-      category: "Large Cap",
-      rating: "4",
-      oneyear: "10.5%",
-      threeyear: "22.6%",
-      fiveyear: "31.6%",
-      type: "Liquid",
-      risk: "High Risk",
-      key: "2",
-    },
-    {
-      name: "IDFC Largecap Fund",
-      category: "Mid Cap",
-      rating: "4",
-      oneyear: "8.5%",
-      threeyear: "19.6%",
-      fiveyear: "34.6%",
-      type: "Debt",
-      risk: "Low Risk",
-      key: "3",
-    },
-    {
-      name: "Baroda Mutual Fund",
-      category: "Small Cap",
-      rating: "3",
-      oneyear: "9.5%",
-      threeyear: "20.6%",
-      fiveyear: "37.6%",
-      type: "Index",
-      risk: "Moderate Risk",
-      key: "4",
-    },
-    {
-      name: "IDBI Largecap Fund",
-      category: "Large Cap",
-      rating: "3",
-      oneyear: "9.5%",
-      threeyear: "21.6%",
-      fiveyear: "33.6%",
-      type: "Equity",
-      risk: "High Risk",
-      key: "5",
-    },
-  ]);
-  // console.log(FundsData);
   const getHeader = () => {
     return (
       <View style={styles.profiletext}>
@@ -105,6 +20,9 @@ export default function FundsListScreen({ navigation }) {
       </View>
     );
   };
+  funds = data.FundsData;
+  Images = data.Images;
+  Logo = data.Logo;
 
   return (
     <View style={styles.container}>

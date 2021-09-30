@@ -21,7 +21,6 @@ const reducer = (state = initialState, action) => {
       ...state,
       loggedInUserId: action.id,
     };
-    console.log("new obj is ", newObj);
     return newObj;
   } else if (action.type === "CREATE_USER") {
     const newId = state.lastUsedId + 1;
@@ -32,14 +31,12 @@ const reducer = (state = initialState, action) => {
       lastUsedId: newId,
       users: [...state.users, newUser],
     };
-    console.log("new obj signup is ", newObj);
     return newObj;
   } else if (action.type === "LOGOUT_USER") {
     const newObj = {
       ...state,
       loggedInUserId: null,
     };
-    console.log("after logout ", newObj);
     return newObj;
   }
   return state;

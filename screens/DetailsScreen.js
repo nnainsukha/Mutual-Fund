@@ -1,32 +1,13 @@
 import React, { useContext, useState } from "react";
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  Image,
-  Platform,
-  StyleSheet,
-  ScrollView,
-  FlatList,
-} from "react-native";
-import FormInput from "../components/FormInput";
-import FormButton from "../components/FormButton";
-import CardList from "../components/CardList";
+import { View, Text, Image, StyleSheet, ScrollView } from "react-native";
 import Card from "../components/Card";
 import Charts from "../components/Charts";
 import Table from "../components/Table";
 import HoldingsTable from "../components/HoldingsTable";
+import * as data from "../data/FundsData";
 
 export default function DetailsScreen({ route, navigation }) {
-  const Logo = {
-    logos: {
-      "Axis Bluechip Fund": require("../assets/axis.png"),
-      "Kotak Bluechip Fund": require("../assets/kotak.png"),
-      "IDFC Largecap Fund": require("../assets/idfc.png"),
-      "Baroda Mutual Fund": require("../assets/baroda.png"),
-      "IDBI Largecap Fund": require("../assets/idbi.png"),
-    },
-  };
+  const Logo = data.Logo;
 
   const item = route.params;
   const name = item.name;
@@ -34,6 +15,11 @@ export default function DetailsScreen({ route, navigation }) {
   const type = item.type;
   const risk = item.risk;
   const oneyear = item.oneyear;
+  const nav = item.nav;
+  const rating = item.rating;
+  const sip = item.sip;
+  const fundsize = item.fundsize;
+  const investmentobj = item.investmentobj;
 
   return (
     <ScrollView>
@@ -51,7 +37,7 @@ export default function DetailsScreen({ route, navigation }) {
         </View>
         <Text style={styles.percent}>{oneyear}</Text>
         <Text style={styles.belowpercent}>1Y</Text>
-        <Charts />
+        <Charts name={name} />
         <View style={styles.infoheader}>
           <Text style={styles.infoheadertext}>NAV</Text>
           <Text style={styles.infoheadertext}>Rating</Text>
@@ -59,17 +45,13 @@ export default function DetailsScreen({ route, navigation }) {
           <Text style={styles.infoheadertext}>Fund Size</Text>
         </View>
         <View style={styles.infoheader}>
-          <Text style={styles.infoheadervalue}>Rs.169</Text>
-          <Text style={styles.infoheadervalue}>5</Text>
-          <Text style={styles.infoheadervalue}>100</Text>
-          <Text style={styles.infoheadervalue}>5,037.4Cr</Text>
+          <Text style={styles.infoheadervalue}>{nav}</Text>
+          <Text style={styles.infoheadervalue}>{rating}</Text>
+          <Text style={styles.infoheadervalue}>{sip}</Text>
+          <Text style={styles.infoheadervalue}>{fundsize}</Text>
         </View>
         <Text style={styles.heading}>Investment Objective</Text>
-        <Text style={styles.objectivetext}>
-          The scheme aims to generate long term capital growth by investing in a
-          diversified portfolio predominantly consisting of equity and equity
-          related instruments of large cap companies.
-        </Text>
+        <Text style={styles.objectivetext}>{investmentobj}</Text>
         <Text style={styles.heading}>Returns and Rankings</Text>
         <Table />
         <Text style={styles.heading}>Holdings</Text>

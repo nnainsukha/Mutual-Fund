@@ -1,6 +1,5 @@
 import React from "react";
-import { Text, TouchableOpacity, StyleSheet, View, Image } from "react-native";
-import { windowHeight, windowWidth } from "../utils/Dimensions";
+import { StyleSheet, View } from "react-native";
 
 const Card = (props) => {
   return (
